@@ -20,10 +20,22 @@ var roleHarvester = {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 }
+                return;
+            }
+            targets = creep.room.find(FIND_MY_STRUCTURES, {
+                    filter: (structure) => {
+                        return structure.energy < structure.energyCapacity;
+                    }
+            });
+            if(targets.length > 0) {
+                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0]);
+                }
+                return;
             }
             else
             {
-                roleUpgrader.run(this);
+                roleUpgrader.run(creep);
             }
         }
     }
