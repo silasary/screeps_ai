@@ -1,3 +1,9 @@
+var roles = [
+    {role: 'harvester', n: 2}, 
+    {role: 'builder', n:3},
+    {role: 'upgrader', n:1}
+    ];
+
 var spawnController = {
 
     run: function() 
@@ -15,13 +21,8 @@ var spawnController = {
             return;
         }
 
-        var roles = [
-            {role: 'harvester', n: 2}, 
-            {role: 'builder', n:3},
-            {role: 'upgrader', n:1}
-            ];
         for (var r in roles) {
-            role = roles[r];
+            var role = roles[r];
             var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
             //console.log(role.role + ": " + harvesters + "/" + role.n);
 
