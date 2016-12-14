@@ -1,12 +1,12 @@
+var creepHelper = require('creep.helpers');
+var roleUpgrader = require('role.upgrader');
+
 var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
         if(creep.carry.energy < creep.carryCapacity) {
-            var source = creep.room.findClosestByPath(FIND_SOURCES);
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
+            creepHelper.moveToSource(creep);
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
@@ -20,6 +20,10 @@ var roleHarvester = {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 }
+            }
+            else
+            {
+                roleUpgrader.run(this);
             }
         }
     }
