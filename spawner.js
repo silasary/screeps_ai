@@ -61,6 +61,7 @@ var spawnController = {
             spawn.memory.renewing = false;
             creep.memory.renewing = false;
         }
+        return true;
     }
 }
 
