@@ -4,6 +4,23 @@ var roles = [
     {role: 'upgrader', n:2}
     ];
 
+var spawnCreep = function(spawn, energy, roleName) {
+            // create a balanced body as big as possible with the given energy
+            var numberOfParts = Math.floor(energy / 200);
+            var body = [];
+            for (let i = 0; i < numberOfParts; i++) {
+                body.push(WORK);
+            }
+            for (let i = 0; i < numberOfParts; i++) {
+                body.push(CARRY);
+            }
+            for (let i = 0; i < numberOfParts; i++) {
+                body.push(MOVE);
+            }
+
+            // create creep with the created body and the given role
+            return spawn.createCreep(body, undefined, { role: roleName });
+        };
 
 var spawnController = {
 
@@ -18,18 +35,22 @@ var spawnController = {
                 console.log('Clearing non-existing creep memory:', name);
             }
         }
-
+        var energy = spawn.room.energyCapacityAvailable;
+        if (energy < 200)
+        {
+            return;
+        }
         if (spawn.spawning){
             return;
         }
 
         for (var r in roles) {
             var role = roles[r];
-            var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
+            var existing = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
             //console.log(role.role + ": " + harvesters + "/" + role.n);
 
-            if(harvesters.length < role.n) {
-                var newName = spawn.createCreep([WORK,CARRY,MOVE], undefined, {role: role.role});
+            if(existing.length < role.n) {
+                var newName = spawnCreep(spawn, energy, role.role);
                 if (!(newName < 0)){
                     console.log('Spawning new ' + role.role + ': ' + newName);
                     return

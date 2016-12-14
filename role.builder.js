@@ -1,5 +1,6 @@
 var creepHelper = require('creep.helpers');
 var roleHarvester = require('role.harvester');
+var buildPlan = require('buildplan');
 
 var roleBuilder = {
 
