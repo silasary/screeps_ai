@@ -14,8 +14,10 @@ var controller = {
         {role: 'builder', n:1},
         {role: 'upgrader', n:1}
         ];
-    for (var role in roles) {
+    for (var r in roles) {
+        role = roles[r];
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
+        console.log(role.role + ": " + harvesters + "/" + role.n);
 
         if(harvesters.length < role.n) {
             var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {role: role.role});
