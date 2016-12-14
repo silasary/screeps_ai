@@ -30,6 +30,7 @@ var spawnController = {
                 var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {role: role.role});
                 if (!(newName < 0)){
                     console.log('Spawning new ' + role.role + ': ' + newName);
+                    return
                 }
             }
         }
