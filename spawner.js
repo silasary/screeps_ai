@@ -1,4 +1,4 @@
-var controller = {
+var spawnController = {
 
     run: function() 
     {
@@ -15,7 +15,7 @@ var controller = {
             return;
         }
 
-        roles = [
+        var roles = [
             {role: 'harvester', n: 2}, 
             {role: 'builder', n:3},
             {role: 'upgrader', n:1}
@@ -62,4 +62,4 @@ var controller = {
     }
 }
 
-module.exports = controller;
+module.exports = spawnController;
