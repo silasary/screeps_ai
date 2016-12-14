@@ -1,13 +1,15 @@
 var roles = [
-    {role: 'harvester', n: 2}, 
+    {role: 'harvester', n: 4}, 
     {role: 'builder', n:3},
-    {role: 'upgrader', n:1}
+    {role: 'upgrader', n:2}
     ];
+
 
 var spawnController = {
 
     run: function() 
     {
+        var spawn = Game.spawns['Spawn1'];
         for(var name in Memory.creeps) 
         {
             if(!Game.creeps[name]) 
@@ -17,7 +19,7 @@ var spawnController = {
             }
         }
 
-        if (Game.spawns['Spawn1'].spawning){
+        if (spawn.spawning){
             return;
         }
 
@@ -27,7 +29,7 @@ var spawnController = {
             //console.log(role.role + ": " + harvesters + "/" + role.n);
 
             if(harvesters.length < role.n) {
-                var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {role: role.role});
+                var newName = spawn.createCreep([WORK,CARRY,MOVE], undefined, {role: role.role});
                 if (!(newName < 0)){
                     console.log('Spawning new ' + role.role + ': ' + newName);
                     return
