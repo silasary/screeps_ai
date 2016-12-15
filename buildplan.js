@@ -1,10 +1,10 @@
 var buildPlan = 
 {
     roads: function(){
-        var sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
-        if (sites.length){
-            return false;
-        }
+        // var sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
+        // if (sites.length){
+        //     return false;
+        // }
         for (var name in Game.creeps){
             var creep = Game.creeps[name];
             if (creep.memory.role == "builder"){
