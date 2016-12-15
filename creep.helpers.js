@@ -1,6 +1,30 @@
+
+var getPath= function(pos, target){
+    var room = Game.rooms[pos.roomName];
+    if (!room.memory)
+        room.memory = {};
+    if (!room.memory.pathing)
+        room.memory.pathing = {};
+    var key = `${target.id},${pos.x},${pos.y}`
+    if (!room.memory.pathing[key] || room.memory.pathing[key].expires < Game.time)
+    {
+        var route = room.findPath(pos, target.pos, {ignoreCreeps: true, ignoreRoads: true, serialize: true});
+        room.memory.pathing[key] = {
+            expires: Game.time + 200,
+            route: route
+        };
+    }
+    return Room.deserializePath(room.memory.pathing[key].route);
+}
+
 /** @param {Creep} creep **/
 var MoveCreep = function(creep, target){
-    return creep.moveTo(target, {reusePath: 20})
+    path = getPath(creep.pos, target);
+    var res = creep.moveByPath(path);
+    if (res == ERR_NOT_FOUND)
+        return creep.moveTo(target, {reusePath: 20})
+    else
+        return res;
 }
 
 /** @param {Creep} creep **/
