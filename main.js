@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleWallRepairer = require('role.wallRepairer');
+var roleScout = require('role.scout');
 var spawner = require('spawner');
 
 module.exports.loop = function () {
@@ -35,6 +36,9 @@ module.exports.loop = function () {
         }
         else if(creep.memory.role == 'wallRepairer') {
             roleWallRepairer.run(creep);
+        }
+        else if(creep.memory.role == 'scout') {
+            roleScout.run(creep);
         }
     }
 }

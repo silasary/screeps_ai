@@ -1,7 +1,7 @@
 var roles = [
     {role: 'harvester', n: 4}, 
     {role: 'builder',   n:2},
-    {role: 'upgrader',  n:4},
+    {role: 'upgrader',  n:2},
     {role: 'repairer',  n:2},
     {role: 'wallRepairer',  n:1},
 ];
