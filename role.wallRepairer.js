@@ -6,7 +6,7 @@ module.exports = {
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
-        else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
+        else if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
 
@@ -35,7 +35,8 @@ module.exports = {
             // if we find a wall that has to be repaired
             if (target != undefined) {
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
-                    creepHelper.moveCreep(creep, target);
+                    let res = creepHelper.moveCreep(creep, target);
+                    // console.log(res);
                 }
             }
             else {

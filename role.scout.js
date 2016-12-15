@@ -7,7 +7,7 @@ module.exports = {
             creep.room.memory = {};
         }
         creep.room.memory.lastScouted = Game.time;
-        creep.room.memory.hasSource = creep.pos.findClosestByPath(FIND_SOURCES) == null;
+        creep.room.memory.hasSource = creep.room.find(FIND_SOURCES).length;
         var destination = creep.memory.destination;
         if (destination == creep.room.name){
             creep.memory.destination = null;
@@ -18,6 +18,8 @@ module.exports = {
             var lastScouted = Game.time;
             var room = null;
             for (var dir in exits){
+                print(lastScouted)
+                print(room)
                 if (Memory.rooms[exits[dir]] == undefined)
                 {
                     lastScouted = 1;
@@ -34,10 +36,18 @@ module.exports = {
             creep.say('Scouting '+destination);
             console.log(`${creep.name} scouting ${destination}`);
         }
-        var route = Game.map.findRoute(creep.room, destination);
-        if(route.length > 0) {
-            var exit = creep.pos.findClosestByRange(route[0].exit);
+        var exitdir = Game.map.findExit(creep.room, destination);
+        if(exitdir) {
+            var exit = creep.pos.findClosestByRange(exit);
             creep.moveTo(exit);
+        }
+        else
+        {
+            var route = Game.map.findRoute(creep.room, destination);
+            if(route.length > 0) {
+                var exit = creep.pos.findClosestByRange(route[0].exit);
+                creep.moveTo(exit);
+            }
         }
     }
 };
