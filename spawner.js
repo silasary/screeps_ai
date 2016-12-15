@@ -69,13 +69,16 @@ var spawnController = {
             creep.memory.renewing = false;
             return false;
         }
-        if (spawn.memory.renewing && spawn.memory.renewing != creep)
+        if (spawn.memory.renewing && spawn.memory.renewing != creep.name)
         {
             creep.memory.renewing = false;
             return false;
         }
-        spawn.memory.renewing = creep;
-        creep.memory.renewing = spawn;
+        if (!spawn.memory.renewing) {
+            spawn.memory.renewing = creep.name;
+            creep.memory.renewing = spawn.name;
+            creep.say("renewing!")
+        }
         var res = spawn.renewCreep(creep);
         if(res == ERR_NOT_IN_RANGE) {
             creep.moveTo(spawn);
