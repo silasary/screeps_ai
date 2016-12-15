@@ -13,6 +13,7 @@ var roleHarvester = {
                     var ret = creepHelper.MoveCreep(creep, dropped);
                     if (ret == OK)
                     {
+                        creep.say("Picking up dropped energy!")
                         return;
                     }
                 };
