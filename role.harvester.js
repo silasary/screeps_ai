@@ -5,7 +5,15 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.carry.energy < creep.carryCapacity) {
+        if(creep.memory.working && creep.carry.energy == 0) {
+            creep.memory.working = false;
+            creep.say('collecting');
+        }
+        if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.working = true;
+            creep.say('depositing');
+        }
+        if (!creep.memory.working){
             var dropped = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
             if (dropped)
             {
@@ -33,8 +41,8 @@ var roleHarvester = {
             });
             if(targets.length > 0) {
                 closest = creep.pos.findClosestByRange(targets);
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+                if(creep.transfer(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(closest);
                 }
                 return;
             }
@@ -52,7 +60,7 @@ var roleHarvester = {
             targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER)
-                         && structure.energy < structure.energyCapacity;
+                         && structure.energy < structure.storeCapacity;
                 }
             });
             if(targets.length > 0) {
