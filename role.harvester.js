@@ -40,7 +40,7 @@ var roleHarvester = {
                     }
             });
             if(targets.length > 0) {
-                closest = creep.pos.findClosestByRange(targets);
+                var closest = creep.pos.findClosestByRange(targets);
                 if(creep.transfer(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(closest);
                 }
