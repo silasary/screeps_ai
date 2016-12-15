@@ -5,7 +5,7 @@ module.exports = {
     run: function(creep) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
-            creep.say('harvesting');
+            creep.say('collecting');
         }
         else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
@@ -19,7 +19,7 @@ module.exports = {
 
             if (structure != undefined) {
                 if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(structure);
+                    creepHelper.moveCreep(creep, structure);
                 }
             }
             else {
@@ -29,7 +29,7 @@ module.exports = {
                 });
                 if (structure != undefined) {
                     if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(structure);
+                        creepHelper.moveCreep(creep, structure);
                     }
                 }
                 else {
