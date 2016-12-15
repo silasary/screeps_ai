@@ -1,9 +1,10 @@
 var roles = [
     {role: 'harvester', n: 4}, 
-    {role: 'builder',   n:4},
+    {role: 'builder',   n:2},
     {role: 'upgrader',  n:4},
-    {role: 'repairer',  n:2}
-    ];
+    {role: 'repairer',  n:2},
+    {role: 'wallRepairer',  n:1},
+];
 
 var spawnCreep = function(spawn, energy, roleName) {
             // create a balanced body as big as possible with the given energy

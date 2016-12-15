@@ -6,7 +6,7 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
         if(creep.carry.energy < creep.carryCapacity) {
-            var dropped = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+            var dropped = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
             if (dropped)
             {
                 if(creep.pickup(dropped[0]) == ERR_NOT_IN_RANGE) {

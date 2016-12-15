@@ -23,18 +23,7 @@ module.exports = {
                 }
             }
             else {
-                // This time including walls
-                var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: (s) => s.hits < s.hitsMax
-                });
-                if (structure != undefined) {
-                    if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
-                        creepHelper.moveCreep(creep, structure);
-                    }
-                }
-                else {
                     roleBuilder.run(creep);
-                }
             }
         }
         else {
