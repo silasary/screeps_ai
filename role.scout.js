@@ -18,8 +18,8 @@ module.exports = {
             var lastScouted = Game.time;
             var room = null;
             for (var dir in exits){
-                print(lastScouted)
-                print(room)
+                console.log(lastScouted);
+                console.log(room);
                 if (Memory.rooms[exits[dir]] == undefined)
                 {
                     lastScouted = 1;

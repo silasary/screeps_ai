@@ -1,5 +1,5 @@
 var roles = [
-    {role: 'harvester', n: 2}, 
+    {role: 'harvester', n: 4}, 
     {role: 'builder',   n:1},
     {role: 'upgrader',  n:1},
     {role: 'repairer',  n:1},
@@ -23,6 +23,13 @@ var spawnCreep = function(spawn, energy, roleName) {
             // create creep with the created body and the given role
             return spawn.createCreep(body, undefined, { role: roleName, home: spawn.room.name });
         };
+
+var spawnGuard = function(spawn){
+        if (!spawn)
+            return;
+        if (spawn.room.find(FIND_HOSTILE_CREEPS))
+            return spawn.createCreep([ATTACK, ATTACK, MOVE], undefined, { role: "guard", home: spawn.room.name });
+}
 
 var countCreeps = function(spawn){
     if (!spawn)
@@ -64,7 +71,9 @@ var spawnController = {
     run: function() 
     {
         var spawn = Game.spawns['Spawn1'];
-        countCreeps(spawn);
+        // for (var spawn of Game.spawns){
+            spawnGuard(spawn);
+            countCreeps(spawn);
     },
 
     /** @param {Creep} creep **/
@@ -109,6 +118,10 @@ var spawnController = {
         if (!spawn)
             return;
         return spawn.createCreep([MOVE, ATTACK, MOVE], undefined, { role: "scout", home: spawn.room.name });
+    },
+    spawnGuard: function(){ 
+        for (var spawn of Game.spawns)
+            spawnGuard(spawn);
     }
 }
 
