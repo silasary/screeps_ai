@@ -1,10 +1,17 @@
+// This is nasty. Do it smarter.
+function getRandomFreePos(startPos, distance) {
+    var x,y;
+    do {
+        x = startPos.x + Math.floor(Math.random()*(distance*2+1)) - distance;
+        y = startPos.y + Math.floor(Math.random()*(distance*2+1)) - distance;
+    }
+    while((x+y)%2 != (startPos.x+startPos.y)%2 || Game.map.getTerrainAt(x,y,startPos.roomName) == 'wall');
+    return new RoomPosition(x,y,startPos.roomName);
+}
+
 var buildPlan = 
 {
     roads: function(){
-        // var sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
-        // if (sites.length){
-        //     return false;
-        // }
         for (var name in Game.creeps){
             var creep = Game.creeps[name];
             if (creep.memory.role == "builder"){
