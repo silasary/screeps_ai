@@ -33,7 +33,7 @@ var roleBuilder = {
             }
         }
         else {
-            creepHelper.moveToSource(creep);
+            creepHelper.moveToSourceOrContainer(creep);
         }
     }
 };

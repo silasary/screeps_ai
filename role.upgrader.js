@@ -20,7 +20,7 @@ var roleUpgrader = {
             }
         }
         else {
-            creepHelper.moveToSource(creep);
+            creepHelper.moveToSourceOrContainer(creep);
         }
     }
 };

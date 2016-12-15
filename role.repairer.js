@@ -5,9 +5,11 @@ module.exports = {
     run: function(creep) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
+            creep.say('harvesting');
         }
         else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
+            creep.say('repairing');
         }
 
         if (creep.memory.working == true) {
@@ -36,7 +38,7 @@ module.exports = {
             }
         }
         else {
-            creepHelper.moveToSource(creep);
+            creepHelper.moveToSourceOrContainer(creep);
         }
     }
 };
