@@ -25,10 +25,12 @@ var spawnCreep = function(spawn, energy, roleName) {
         };
 
 var spawnGuard = function(spawn){
-        if (!spawn)
-            return;
-        if (spawn.room.find(FIND_HOSTILE_CREEPS))
-            return spawn.createCreep([ATTACK, ATTACK, MOVE], undefined, { role: "guard", home: spawn.room.name });
+    if (!spawn)
+        return;
+    if (spawn.room.find(FIND_HOSTILE_CREEPS).length > 0)
+    {
+        return spawn.createCreep([ATTACK, MOVE, MOVE], undefined, { role: "guard", home: spawn.room.name });
+    }
 }
 
 var countCreeps = function(spawn){
