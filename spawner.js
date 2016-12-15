@@ -30,6 +30,11 @@ var spawnGuard = function(spawn){
     if (spawn.spawning){
         return;
     }
+    var energy = spawn.room.energyCapacityAvailable;
+    if (energy < 200)
+    {
+        return;
+    }
     if (spawn.room.find(FIND_HOSTILE_CREEPS).length > 0)
     {
         var name = spawn.createCreep([ATTACK, MOVE, MOVE], undefined, { role: "guard", home: spawn.room.name });

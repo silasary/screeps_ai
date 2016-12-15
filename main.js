@@ -10,6 +10,12 @@ var spawner = require('spawner');
 module.exports.loop = function () {
     spawner.run()
 
+    var towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
+    // for each tower
+    for (let tower of towers) {
+        require('tower').run(tower);
+    }
+
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         if (creep.ticksToLive < 200)
