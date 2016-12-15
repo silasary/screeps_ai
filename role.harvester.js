@@ -21,7 +21,7 @@ var roleHarvester = {
                     var ret = creepHelper.moveCreep(creep, dropped);
                     if (ret == OK)
                     {
-                        creep.say("Picking up dropped energy!")
+                        // creep.say("Picking up dropped energy!")
                         return;
                     }
                     else
