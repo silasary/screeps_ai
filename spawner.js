@@ -21,50 +21,58 @@ var spawnCreep = function(spawn, energy, roleName) {
             }
 
             // create creep with the created body and the given role
-            return spawn.createCreep(body, undefined, { role: roleName });
+            return spawn.createCreep(body, undefined, { role: roleName, home: spawn.room.name });
         };
+
+var countCreeps = function(spawn){
+    if (!spawn)
+        return;
+    for(var name in Memory.creeps) 
+    {
+        if(!Game.creeps[name]) 
+        {
+            delete Memory.creeps[name];
+            console.log('Clearing non-existing creep memory:', name);
+        }
+    }
+    var energy = spawn.room.energyCapacityAvailable;
+    if (energy < 200)
+    {
+        return;
+    }
+    if (spawn.spawning){
+        return;
+    }
+
+    for (var r in roles) {
+        var role = roles[r];
+        var existing = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
+        //console.log(role.role + ": " + harvesters + "/" + role.n);
+
+        if(existing.length < role.n) {
+            var newName = spawnCreep(spawn, energy, role.role);
+            if (!(newName < 0)){
+                console.log('Spawning new ' + role.role + ': ' + newName);
+                return
+            }
+        }
+    }
+}
 
 var spawnController = {
 
     run: function() 
     {
         var spawn = Game.spawns['Spawn1'];
-        for(var name in Memory.creeps) 
-        {
-            if(!Game.creeps[name]) 
-            {
-                delete Memory.creeps[name];
-                console.log('Clearing non-existing creep memory:', name);
-            }
-        }
-        var energy = spawn.room.energyCapacityAvailable;
-        if (energy < 200)
-        {
-            return;
-        }
-        if (spawn.spawning){
-            return;
-        }
-
-        for (var r in roles) {
-            var role = roles[r];
-            var existing = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
-            //console.log(role.role + ": " + harvesters + "/" + role.n);
-
-            if(existing.length < role.n) {
-                var newName = spawnCreep(spawn, energy, role.role);
-                if (!(newName < 0)){
-                    console.log('Spawning new ' + role.role + ': ' + newName);
-                    return
-                }
-            }
-        }
+        countCreeps(spawn);
     },
 
     /** @param {Creep} creep **/
     renew: function(creep)
     {
         var spawn = Game.spawns['Spawn1'];
+        if (!spawn)
+            return;
         if (spawn.spawning){
             spawn.memory.renewing = false;
             creep.memory.renewing = false;
