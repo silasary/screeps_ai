@@ -27,6 +27,7 @@ var roleBuilder = {
             {
                 // Don't sit around doing nothing
                 var res = buildPlan.roads();
+                buildPlan.extensions();
                 if (!res){
                     roleHarvester.run(creep);
                 }

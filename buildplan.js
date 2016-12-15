@@ -9,6 +9,13 @@ function getRandomFreePos(startPos, distance) {
     return new RoomPosition(x,y,startPos.roomName);
 }
 
+function build(spawn, structureType) {
+    var structures = spawn.room.find(FIND_STRUCTURES, {filter: {structureType, my: true}});
+    for(var i=0; i < CONTROLLER_STRUCTURES[structureType][spawn.room.controller.level] - structures.length; i++) {
+        getRandomFreePos(spawn.pos, 5).createConstructionSite(structureType);
+    }
+}
+
 var buildPlan = 
 {
     roads: function(){
@@ -30,7 +37,11 @@ var buildPlan =
                 }
             }
         }
-        return false;
+    },
+
+    extensions: function(){
+        for (var spawn in Game.spawns)
+            build(spawn, STRUCTURE_EXTENSION);
     }
 }
 
