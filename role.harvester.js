@@ -9,8 +9,8 @@ var roleHarvester = {
             var dropped = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
             if (dropped)
             {
-                if(creep.pickup(dropped[0]) == ERR_NOT_IN_RANGE) {
-                    var ret = creepHelper.MoveCreep(creep, dropped);
+                if(creep.pickup(dropped) == ERR_NOT_IN_RANGE) {
+                    var ret = creepHelper.moveCreep(creep, dropped);
                     if (ret == OK)
                     {
                         creep.say("Picking up dropped energy!")
@@ -18,7 +18,7 @@ var roleHarvester = {
                     }
                     else
                         console.log(ret);
-                };
+                }
             }
             creepHelper.moveToSource(creep);
         }
