@@ -40,8 +40,11 @@ var buildPlan =
     },
 
     extensions: function(){
-        for (var spawn in Game.spawns)
+        for (var name in Game.spawns)
+        {
+            spawn = Game.spawns[name];
             build(spawn, STRUCTURE_EXTENSION);
+        }
     }
 }
 
