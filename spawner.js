@@ -83,7 +83,7 @@ var spawnController = {
         if(res == ERR_NOT_IN_RANGE) {
             creep.moveTo(spawn);
         }
-        if (res == ERR_FULL)
+        if (res == ERR_FULL || res == ERR_NOT_ENOUGH_ENERGY)
         {
             spawn.memory.renewing = false;
             creep.memory.renewing = false;
