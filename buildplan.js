@@ -14,7 +14,7 @@ var buildPlan =
             // console.log(things);
             if (things.length == 0){
                 creep.pos.createConstructionSite(STRUCTURE_ROAD);
-                console.log("Building a road at " + pos.x, "," + pos.y);
+                console.log("Building a road at " + creep.pos.x, "," + creep.pos.y);
                 return true;
             }
             else{
