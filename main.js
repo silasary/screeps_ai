@@ -6,7 +6,6 @@ var roleWallRepairer = require('role.wallRepairer');
 var spawner = require('spawner');
 
 module.exports.loop = function () {
-
     spawner.run()
 
     for(var name in Game.creeps) {

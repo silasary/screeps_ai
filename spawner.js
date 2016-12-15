@@ -73,6 +73,11 @@ var spawnController = {
         var spawn = Game.spawns['Spawn1'];
         if (!spawn)
             return;
+        var energy = spawn.room.energyCapacityAvailable;
+        if (energy < 200)
+        {
+            return;
+        }
         if (spawn.spawning){
             spawn.memory.renewing = false;
             creep.memory.renewing = false;
