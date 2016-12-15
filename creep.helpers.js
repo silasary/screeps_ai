@@ -1,13 +1,13 @@
 /** @param {Creep} creep **/
 var MoveCreep = function(creep, target){
-    creep.moveTo(target, {reusePath: 20})
+    return creep.moveTo(target, {reusePath: 20})
 }
 
 /** @param {Creep} creep **/
 var moveToSource = function(creep) {
     var source = creep.pos.findClosestByPath(FIND_SOURCES);
     if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-        MoveCreep(creep, source);
+        return MoveCreep(creep, source);
     };
 };
 
@@ -19,7 +19,7 @@ var moveToSourceOrContainer = function(creep) {
     });
     if (container != undefined) {
         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            MoveCreep(creep, container);
+            return MoveCreep(creep, container);
         }
     }
     else {

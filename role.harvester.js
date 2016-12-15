@@ -6,6 +6,17 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
         if(creep.carry.energy < creep.carryCapacity) {
+            var dropped = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+            if (dropped)
+            {
+                if(creep.pickup(dropped[0]) == ERR_NOT_IN_RANGE) {
+                    var ret = creepHelper.MoveCreep(creep, dropped);
+                    if (ret == OK)
+                    {
+                        return;
+                    }
+                };
+            }
             creepHelper.moveToSource(creep);
         }
         else {
