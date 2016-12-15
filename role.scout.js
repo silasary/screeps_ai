@@ -10,6 +10,9 @@ module.exports = {
             creep.room.memory.lastScouted = Game.time;
             creep.room.memory.hasSource = creep.pos.findClosestByPath(FIND_SOURCES) == null;
         }
+        if (creep.memory.target == creep.room.name){
+            creep.memory.target = null;
+        }
         if (!creep.memory.target){
             var exits = Game.map.describeExits(creep.room.name);
             var lastScouted = Game.time;
@@ -27,9 +30,12 @@ module.exports = {
                 }
             }
             creep.memory.target = room.name;
+            creep.say('Now heading to room '+route[0].room);
         }
-        if (creep.memory.target == creep.room.name){
-            creep.memory.target = null;
+        var route = Game.map.findRoute(creep.room, creep.memory.target);
+        if(route.length > 0) {
+            var exit = creep.pos.findClosestByRange(route[0].exit);
+            creep.moveTo(exit);
         }
     }
 };

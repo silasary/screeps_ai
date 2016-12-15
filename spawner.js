@@ -1,8 +1,8 @@
 var roles = [
-    {role: 'harvester', n: 4}, 
-    {role: 'builder',   n:2},
-    {role: 'upgrader',  n:2},
-    {role: 'repairer',  n:2},
+    {role: 'harvester', n: 2}, 
+    {role: 'builder',   n:1},
+    {role: 'upgrader',  n:1},
+    {role: 'repairer',  n:1},
     {role: 'wallRepairer',  n:1},
 ];
 
@@ -103,6 +103,12 @@ var spawnController = {
             creep.memory.renewing = false;
         }
         return true;
+    },
+    spawnScout: function(){
+        var spawn = Game.spawns['Spawn1'];
+        if (!spawn)
+            return;
+        return spawn.createCreep([MOVE, ATTACK, MOVE], undefined, { role: "scout", home: spawn.room.name });
     }
 }
 
