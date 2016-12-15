@@ -1,6 +1,6 @@
 /** @param {Creep} creep **/
 var MoveCreep = function(creep, target){
-    creep.moveTo(source, {reusePath: 20})
+    creep.moveTo(target, {reusePath: 20})
 }
 
 /** @param {Creep} creep **/
