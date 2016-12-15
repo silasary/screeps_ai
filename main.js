@@ -13,11 +13,11 @@ module.exports.loop = function () {
         var creep = Game.creeps[name];
         if (creep.ticksToLive < 200)
         {
-            var res = spawner.renew(creep);
-            if (res)
-            {
-                continue;
-            }
+            // var res = spawner.renew(creep);
+            // if (res)
+            // {
+            //     continue;
+            // }
         }
         if (creep.memory.renewing){
             spawner.renew(creep);

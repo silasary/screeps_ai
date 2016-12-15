@@ -3,24 +3,24 @@ var creepHelper = require('creep.helpers');
 module.exports = {
     run: function(creep) {
         if (!creep.room.memory)
-            creep.room.memory = {};
-
-        if (creep.room.memory.lastScouted < Game.time - 1000)
         {
-            creep.room.memory.lastScouted = Game.time;
-            creep.room.memory.hasSource = creep.pos.findClosestByPath(FIND_SOURCES) == null;
+            creep.room.memory = {};
         }
-        if (creep.memory.target == creep.room.name){
-            creep.memory.target = null;
+        creep.room.memory.lastScouted = Game.time;
+        creep.room.memory.hasSource = creep.pos.findClosestByPath(FIND_SOURCES) == null;
+        var destination = creep.memory.destination;
+        if (destination == creep.room.name){
+            creep.memory.destination = null;
+            destination = null;
         }
-        if (!creep.memory.target){
+        if (!destination){
             var exits = Game.map.describeExits(creep.room.name);
             var lastScouted = Game.time;
             var room = null;
             for (var dir in exits){
-                if (!Memory.rooms[exits[dir]])
+                if (Memory.rooms[exits[dir]] == undefined)
                 {
-                    lastScouted = 0;
+                    lastScouted = 1;
                     room = exits[dir];
                 }
                 else if (Memory.rooms[exits[dir]].lastScouted < lastScouted)
@@ -29,10 +29,12 @@ module.exports = {
                     room = exits[dir];
                 }
             }
-            creep.memory.target = room.name;
-            creep.say('Now heading to room '+route[0].room);
+            destination = room;
+            creep.memory.destination = destination;
+            creep.say('Scouting '+destination);
+            console.log(`${creep.name} scouting ${destination}`);
         }
-        var route = Game.map.findRoute(creep.room, creep.memory.target);
+        var route = Game.map.findRoute(creep.room, destination);
         if(route.length > 0) {
             var exit = creep.pos.findClosestByRange(route[0].exit);
             creep.moveTo(exit);
