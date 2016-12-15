@@ -16,6 +16,8 @@ var roleHarvester = {
                         creep.say("Picking up dropped energy!")
                         return;
                     }
+                    else
+                        console.log(ret);
                 };
             }
             creepHelper.moveToSource(creep);
