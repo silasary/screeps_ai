@@ -69,6 +69,9 @@ var roleHarvester = {
                 }
                 return;
             }
+            if (creep.room.name != creep.memory.home){
+                creepHelper.exitRoom(creep, creep.memory.home);
+            }
             roleUpgrader.run(creep);
         }
     }

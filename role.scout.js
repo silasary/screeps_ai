@@ -43,11 +43,7 @@ module.exports = {
         }
         else
         {
-            var route = Game.map.findRoute(creep.room, destination);
-            if(route.length > 0) {
-                var exit = creep.pos.findClosestByRange(route[0].exit);
-                creep.moveTo(exit);
-            }
+            creepHelper.exitRoom(creep, destination);
         }
     }
 };

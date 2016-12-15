@@ -38,9 +38,17 @@ var moveToSource = function(creep) {
     }
     else
     {
-        
+
     }
 };
+
+var exitRoom = function(creep, destination){
+    var route = Game.map.findRoute(creep.room, destination);
+    if(route.length > 0) {
+        var exit = creep.pos.findClosestByRange(route[0].exit);
+        creep.moveTo(exit);
+    }
+}
 
 /** @param {Creep} creep **/
 var moveToSourceOrContainer = function(creep) {
@@ -61,7 +69,8 @@ var moveToSourceOrContainer = function(creep) {
 var creepHelpers = {
     moveCreep: MoveCreep,
     moveToSource: moveToSource,
-    moveToSourceOrContainer: moveToSourceOrContainer
+    moveToSourceOrContainer: moveToSourceOrContainer,
+    exitRoom: exitRoom,
 }
 
 module.exports = creepHelpers;

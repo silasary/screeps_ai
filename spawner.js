@@ -29,7 +29,9 @@ var spawnGuard = function(spawn){
         return;
     if (spawn.room.find(FIND_HOSTILE_CREEPS).length > 0)
     {
-        return spawn.createCreep([ATTACK, MOVE, MOVE], undefined, { role: "guard", home: spawn.room.name });
+        var name = spawn.createCreep([ATTACK, MOVE, MOVE], undefined, { role: "guard", home: spawn.room.name });
+        console.log(`Spawning guard ${name}`);
+        return name;
     }
 }
 
