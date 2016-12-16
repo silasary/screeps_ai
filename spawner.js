@@ -94,8 +94,7 @@ var spawnController = {
         var spawn = Game.spawns['Spawn1'];
         if (!spawn)
             return;
-        var energy = spawn.room.energyCapacityAvailable;
-        if (energy < 200)
+        if (spawn.room.energyAvailable < spawn.room.energyCapacityAvailable)
         {
             return;
         }

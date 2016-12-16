@@ -30,7 +30,7 @@ var MoveCreep = function(creep, target){
 
 /** @param {Creep} creep **/
 var moveToSource = function(creep) {
-    var source = creep.pos.findClosestByPath(FIND_SOURCES);
+    var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (source) => {return source.energy > 0;}});
     if (source){
         if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
             return MoveCreep(creep, source);
