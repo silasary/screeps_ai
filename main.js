@@ -18,6 +18,8 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+        if (creep.fatigue > 0)
+            continue;
         if (creep.ticksToLive < 100)
         {
             var res = spawner.renew(creep);

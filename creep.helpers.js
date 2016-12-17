@@ -29,18 +29,40 @@ var MoveCreep = function(creep, target){
 }
 
 /** @param {Creep} creep **/
-var moveToSource = function(creep) {
+var selectSource = function(creep){
     var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (source) => {return source.energy > 0;}});
+    return source;
+}
+
+var harvestSource = function(creep, source){
     if (source){
         if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
             return MoveCreep(creep, source);
         };
     }
-    else
-    {
+}
 
-    }
+/** @param {Creep} creep **/
+var moveToSource = function(creep) {
+    var source = selectSource(creep);
+    return harvestSource(creep, source);
 };
+
+var collectDroppedEnergy = function() {
+    var dropped = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+    if (dropped)
+    {
+        if(creep.pickup(dropped) == ERR_NOT_IN_RANGE) {
+            var ret = creepHelper.moveCreep(creep, dropped);
+            if (ret == OK)
+            {
+                // creep.say("Picking up dropped energy!")
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 var exitRoom = function(creep, destination){
     var route = Game.map.findRoute(creep.room, destination);
@@ -71,6 +93,8 @@ var creepHelpers = {
     moveToSource: moveToSource,
     moveToSourceOrContainer: moveToSourceOrContainer,
     exitRoom: exitRoom,
+    selectSource: selectSource,
+    harvestSource: harvestSource,
 }
 
 module.exports = creepHelpers;
