@@ -27,8 +27,6 @@ module.exports = {
             var lastScouted = Game.time;
             var room = null;
             for (var dir in exits){
-                console.log(lastScouted);
-                console.log(room);
                 if (!Game.map.isRoomAvailable(exits[dir]))
                     continue; // Can't go there.
                 if (Memory.rooms[exits[dir]] == undefined)
@@ -38,10 +36,12 @@ module.exports = {
                 }
                 else if (Memory.rooms[exits[dir]].lastScouted < lastScouted)
                 {
-                    lastScouted = exits[dir].lastScouted;
+                    lastScouted = Memory.rooms[exits[dir]].lastScouted;
                     room = exits[dir];
                 }
             }
+            console.log(lastScouted);
+            console.log(room);
             destination = room;
             creep.memory.destination = destination;
             creep.say('Scouting '+destination);
