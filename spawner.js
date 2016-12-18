@@ -140,7 +140,10 @@ var spawnController = {
 
     spawnClaimer: function(room){
         var spawn = Game.spawns['Spawn1'];
-        return spawn.createCreep([CLAIM, MOVE], undefined, { role: 'claimer', target: room });
+        var newName = spawn.createCreep([CLAIM, MOVE], undefined, { role: 'claimer', target: room });
+        if (!(newName < 0))
+            console.log(`Creating claimer ${newName} for ${room}`);
+        return newName;
     },
 }
 
