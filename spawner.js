@@ -55,7 +55,7 @@ var countCreeps = function(spawn){
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-    var energy = spawn.room.energyCapacityAvailable;
+    var energy = spawn.room.energyAvailable;
     if (energy < 200)
     {
         return;

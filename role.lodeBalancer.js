@@ -23,12 +23,16 @@ var roleLodeBalancer = {
                             }
                     }
                 );
-                creep.memory.source = _.orderBy(containers, ['store.energy'], ['desc'])[0];
+                var source = containers.sort((a,b) => {return b.store.energy - a.store.energy})[0];
+                if (source)
+                    creep.memory.source = source.id;
+                else
+                    roleHarvester.run(creep);
             }
             if (!creep.memory.source){
-                creep.memory.source = creepHelper.selectSource(creep);
+                creep.memory.source = creepHelper.selectSource(creep).id;
             }
-            creepHelper.harvestSource(creep.memory.source);
+            creepHelper.harvestSource(Game.getObjectById(creep.memory.source));
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
