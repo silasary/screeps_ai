@@ -26,7 +26,7 @@ module.exports.loop = function () {
         }        
         else 
         {
-        require(`role.${creep.memory.role}`).run(creep);
+            require(`role.${creep.memory.role}`).run(creep);
         }
     }
 }
