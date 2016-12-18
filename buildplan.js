@@ -18,10 +18,15 @@ function build(spawn, structureType) {
 
 var buildPlan = 
 {
+    all: function() {
+        buildPlan.roads();
+        buildPlan.extensions();
+        buildPlan.spawns();
+    },
     roads: function(){
         for (var name in Game.creeps){
             var creep = Game.creeps[name];
-            if (creep.memory.role == "builder"){
+            if (creep.memory.role == "builder" || creep.memory.role == "wallRepairer"){
                 continue;
             }
             var things = creep.pos.lookFor(LOOK_STRUCTURES)
@@ -44,6 +49,12 @@ var buildPlan =
         {
             spawn = Game.spawns[name];
             build(spawn, STRUCTURE_EXTENSION);
+        }
+    },
+
+    spawns: function(){
+        for (var room in Game.rooms){
+            build(Game.rooms[room].controller, STRUCTURE_SPAWN);
         }
     }
 }

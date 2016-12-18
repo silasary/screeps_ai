@@ -8,6 +8,9 @@ module.exports = {
             // move to exit
             creep.moveTo(creep.pos.findClosestByRange(exit));
         }
+        else if (creep.room.controller.level > 0){
+            creep.memory.role = "scout";
+        }
         else {
             // try to claim controller
             let res = creep.claimController(creep.room.controller);

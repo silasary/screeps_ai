@@ -52,6 +52,7 @@ module.exports = {
                 if (creep.room.memory.hasSource > 0)
                     {
                         creep.memory.target = creep.room.name;
+                        delete creep.memory.destination;
                         creep.say("Using this room.");
                         return;
                     }

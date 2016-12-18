@@ -1,5 +1,5 @@
 var creepHelper = require('creep.helpers');
-var roleHarvester = require('role.harvester');
+var roleHarvester = require('role.longDistanceHarvester');
 var buildPlan = require('buildplan');
 
 var roleBuilder = {
@@ -28,6 +28,7 @@ var roleBuilder = {
                 // Don't sit around doing nothing
                 var res = buildPlan.roads();
                 buildPlan.extensions();
+                buildPlan.spawns();
                 if (!res){
                     roleHarvester.run(creep);
                 }

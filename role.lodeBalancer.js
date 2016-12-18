@@ -30,7 +30,9 @@ var roleLodeBalancer = {
                     roleHarvester.run(creep);
             }
             if (!creep.memory.source){
-                creep.memory.source = creepHelper.selectSource(creep).id;
+                let source = creepHelper.selectSource(creep);
+                if (source)
+                    creep.memory.source = source.id;
             }
             let res = creepHelper.harvestSource(Game.getObjectById(creep.memory.source));
             if (res != OK){

@@ -1,7 +1,7 @@
 var spawner = require('spawner');
 
 module.exports.loop = function () {
-    spawner.run()
+    spawner.run();
 
     var towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
     // for each tower
@@ -13,7 +13,7 @@ module.exports.loop = function () {
         var creep = Game.creeps[name];
         if (creep.fatigue > 0)
             continue;
-        if (creep.ticksToLive < 100)
+        if (creep.ticksToLive < 200)
         {
             var res = spawner.renew(creep);
             if (res)
