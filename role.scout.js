@@ -12,6 +12,15 @@ module.exports = {
         if (destination == creep.room.name){
             creep.memory.destination = null;
             destination = null;
+            if (creep.pos.y == 0)
+                creep.move(BOTTOM);
+            else if (creep.pos.x == 0)
+                creep.move(RIGHT);
+            else if (creep.pos.y == 49)
+                creep.move(TOP);
+            else if (creep.pos.x == 49)
+                creep.move(LEFT);
+            return;
         }
         if (!destination){
             var exits = Game.map.describeExits(creep.room.name);
@@ -36,14 +45,14 @@ module.exports = {
             creep.say('Scouting '+destination);
             console.log(`${creep.name} scouting ${destination}`);
         }
-        var exitdir = Game.map.findExit(creep.room, destination);
-        if(exitdir) {
-            var exit = creep.pos.findClosestByRange(exit);
-            creep.moveTo(exit);
-        }
-        else
-        {
-            creepHelper.exitRoom(creep, destination);
-        }
+        // var exitdir = Game.map.findExit(creep.room, destination);
+        // if(exitdir) {
+        //     var exit = creep.pos.findClosestByRange(exit);
+        //     creep.moveTo(exit);
+        // }
+        // else
+        // {
+        creepHelper.exitRoom(creep, destination);
+        // }
     }
 };
