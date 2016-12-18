@@ -41,6 +41,14 @@ module.exports = {
                 roleScout.run(creep);
                 if (creep.room.id == creep.memory.home)
                     return;
+                if (creep.room.controller){
+                    if (creep.room.controller.level > 0)
+                        return; // Claimed.
+                    if (creep.room.controller.reservation && creep.room.controller.reservation.username != creep.owner.username)
+                        return;
+                    // if (!creep.room.controller.reservation)
+                        // TODO: RESERVE IT
+                }
                 if (creep.room.memory.hasSource > 0)
                     {
                         creep.memory.target = creep.room.name;
