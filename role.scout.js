@@ -29,6 +29,8 @@ module.exports = {
             for (var dir in exits){
                 console.log(lastScouted);
                 console.log(room);
+                if (!Game.map.isRoomAvailable(exits[dir]))
+                    continue; // Can't go there.
                 if (Memory.rooms[exits[dir]] == undefined)
                 {
                     lastScouted = 1;
