@@ -1,12 +1,11 @@
 var roles = [
     {role: 'lodeBalancer', n:1},
-    {role: 'harvester', n: 4}, 
-    {role: 'builder',   n:1},
-    {role: 'upgrader',  n:1},
-    {role: 'repairer',  n:1},
+    {role: 'harvester', n: 6}, 
+    {role: 'builder',   fn:(spawn) => { return spawn.room.controller.level * 3; }},
+    {role: 'upgrader',  n: 1},
+    {role: 'repairer',  n: 1},
     {role: 'wallRepairer',  n:1},
     {role: 'longDistanceHarvester', n:4},
-
 ];
 
 var spawnCreep = function(spawn, energy, roleName) {
@@ -40,7 +39,7 @@ var spawnGuard = function(spawn){
     }
     if (spawn.room.find(FIND_HOSTILE_CREEPS).length > 0)
     {
-        var name = spawn.createCreep([ATTACK, MOVE, MOVE], undefined, { role: "guard", home: spawn.room.name });
+        var name = spawn.createCreep([MOVE, MOVE, ATTACK], undefined, { role: "guard", home: spawn.room.name });
         console.log(`Spawning guard ${name}`);
         return name;
     }
@@ -68,10 +67,12 @@ var countCreeps = function(spawn){
 
     for (var r in roles) {
         var role = roles[r];
-        var existing = _.filter(Game.creeps, (creep) => creep.memory.role == role.role);
+        var existing = _.filter(Game.creeps, (creep) => creep.memory.role == role.role && creep.memory.home == spawn.room.name);
         //console.log(role.role + ": " + harvesters + "/" + role.n);
-
-        if(existing.length < role.n) {
+        var n = role.n;
+        if (!n)
+            n = role.fn(spawn);
+        if(existing.length < n) {
             var newName = spawnCreep(spawn, energy, role.role);
             if (!(newName < 0)){
                 console.log('Spawning new ' + role.role + ': ' + newName);
@@ -86,9 +87,11 @@ var spawnController = {
     run: function() 
     {
         var spawn = Game.spawns['Spawn1'];
-        // for (var spawn of Game.spawns){
+        for (var spawn in Game.spawns){
+            spawn = Game.spawns[spawn];
             spawnGuard(spawn);
             countCreeps(spawn);
+        }
     },
 
     /** @param {Creep} creep **/
