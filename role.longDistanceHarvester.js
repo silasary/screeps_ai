@@ -41,8 +41,12 @@ module.exports = {
                 roleScout.run(creep);
                 if (creep.room.id == creep.memory.home)
                     return;
-                if (creep.room.memory.hasSource)
-                    creep.memory.target = creep.room.id;
+                if (creep.room.memory.hasSource > 0)
+                    {
+                        creep.memory.target = creep.room.name;
+                        creep.say("Using this room.");
+                        return;
+                    }
                 else
                     return;
             }

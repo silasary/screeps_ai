@@ -5,7 +5,7 @@ var roles = [
     {role: 'upgrader',  n:1},
     {role: 'repairer',  n:1},
     {role: 'wallRepairer',  n:1},
-    // {role: 'longDistanceHarvester', n:4},
+    {role: 'longDistanceHarvester', n:4},
 
 ];
 
