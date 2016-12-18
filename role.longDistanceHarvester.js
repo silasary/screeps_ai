@@ -46,8 +46,8 @@ module.exports = {
                         return; // Claimed.
                     if (creep.room.controller.reservation && creep.room.controller.reservation.username != creep.owner.username)
                         return;
-                    // if (!creep.room.controller.reservation)
-                        // TODO: RESERVE IT
+                    if (!creep.room.controller.reservation)
+                        require('spawner').spawnClaimer(creep.room.name);
                 }
                 if (creep.room.memory.hasSource > 0)
                     {

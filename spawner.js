@@ -136,7 +136,12 @@ var spawnController = {
     spawnGuard: function(){ 
         for (var spawn of Game.spawns)
             spawnGuard(spawn);
-    }
+    },
+
+    spawnClaimer: function(room){
+        var spawn = Game.spawns['Spawn1'];
+        return spawn.createCreep([CLAIM, MOVE], undefined, { role: 'claimer', target: room });
+    },
 }
 
 module.exports = spawnController;
