@@ -1,10 +1,12 @@
 var roles = [
-    // {role: 'lodeBalancer', n:1},
+    {role: 'lodeBalancer', n:1},
     {role: 'harvester', n: 4}, 
     {role: 'builder',   n:1},
     {role: 'upgrader',  n:1},
     {role: 'repairer',  n:1},
     {role: 'wallRepairer',  n:1},
+    // {role: 'longDistanceHarvester', n:4},
+
 ];
 
 var spawnCreep = function(spawn, energy, roleName) {

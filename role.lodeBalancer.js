@@ -34,7 +34,7 @@ var roleLodeBalancer = {
             }
             let res = creepHelper.harvestSource(Game.getObjectById(creep.memory.source));
             if (res != OK){
-                console.log(`Can't balance ${creep.memory.source}: ${res}`);
+                // console.log(`Can't balance ${creep.memory.source}: ${res}`);
                 roleHarvester.run(creep);                
             }
         }

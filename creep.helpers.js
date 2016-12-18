@@ -42,6 +42,8 @@ var harvestSource = function(creep, source){
         };
         return res;
     }
+    else
+        return ERR_INVALID_ARGS;
 }
 
 /** @param {Creep} creep **/
