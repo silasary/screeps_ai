@@ -1,4 +1,5 @@
 var roles = [
+    {role: 'lodeBalancer', n:1},
     {role: 'harvester', n: 4}, 
     {role: 'builder',   n:1},
     {role: 'upgrader',  n:1},
