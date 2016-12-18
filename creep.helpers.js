@@ -36,9 +36,11 @@ var selectSource = function(creep){
 
 var harvestSource = function(creep, source){
     if (source){
-        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+        let res = creep.harvest(source);
+        if(res == ERR_NOT_IN_RANGE) {
             return MoveCreep(creep, source);
         };
+        return res;
     }
 }
 

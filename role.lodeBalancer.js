@@ -32,7 +32,11 @@ var roleLodeBalancer = {
             if (!creep.memory.source){
                 creep.memory.source = creepHelper.selectSource(creep).id;
             }
-            creepHelper.harvestSource(Game.getObjectById(creep.memory.source));
+            let res = creepHelper.harvestSource(Game.getObjectById(creep.memory.source));
+            if (res != OK){
+                console.log(`Can't balance ${creep.memory.source}: ${res}`);
+                roleHarvester.run(creep);                
+            }
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
