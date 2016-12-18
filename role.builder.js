@@ -1,5 +1,5 @@
 var creepHelper = require('creep.helpers');
-var roleHarvester = require('role.longDistanceHarvester');
+var roleHarvester = require('role.lodeBalancer');
 var buildPlan = require('buildplan');
 
 var roleBuilder = {

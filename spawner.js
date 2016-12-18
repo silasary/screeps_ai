@@ -6,20 +6,32 @@ var roles = [
     {role: 'repairer',  n: 1},
     {role: 'wallRepairer',  n:1},
     {role: 'longDistanceHarvester', n:4},
+    {role: 'guard', n:1},
 ];
 
 var spawnCreep = function(spawn, energy, roleName) {
             // create a balanced body as big as possible with the given energy
             var numberOfParts = Math.floor(energy / 200);
             var body = [];
-            for (let i = 0; i < numberOfParts; i++) {
-                body.push(WORK);
+            if (roleName == "guard"){
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(TOUGH);
+                }
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(MOVE);
+                    bode.push(ATTACK);
+                }
             }
-            for (let i = 0; i < numberOfParts; i++) {
-                body.push(CARRY);
-            }
-            for (let i = 0; i < numberOfParts; i++) {
-                body.push(MOVE);
+            else {
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(WORK);
+                }
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(CARRY);
+                }
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(MOVE);
+                }
             }
 
             // create creep with the created body and the given role
@@ -39,7 +51,7 @@ var spawnGuard = function(spawn){
     }
     if (spawn.room.find(FIND_HOSTILE_CREEPS).length > 0)
     {
-        var name = spawn.createCreep([MOVE, MOVE, ATTACK], undefined, { role: "guard", home: spawn.room.name });
+        var name = spawnCreep(spawn, energy, "guard");
         console.log(`Spawning guard ${name}`);
         return name;
     }

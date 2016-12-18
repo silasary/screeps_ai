@@ -13,7 +13,7 @@ module.exports.loop = function () {
         var creep = Game.creeps[name];
         if (creep.fatigue > 0)
             continue;
-        if (creep.ticksToLive < 200)
+        if (creep.ticksToLive < 100 * creep.room.controller.level)
         {
             var res = spawner.renew(creep);
             if (res)
