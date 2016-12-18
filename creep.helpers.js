@@ -35,15 +35,26 @@ var selectSource = function(creep){
 }
 
 var harvestSource = function(creep, source){
-    if (source){
+    if (!source)
+        return ERR_INVALID_ARGS;
+    if (source.structureType)
+    {
+        let res = creep.withdraw(source, RESOURCE_ENERGY);
+        if(res == ERR_NOT_IN_RANGE) {
+            return MoveCreep(creep, source);
+        };
+        // console.log(`withdraw: ${res}`);
+        return res;
+    }
+    else
+    {
         let res = creep.harvest(source);
         if(res == ERR_NOT_IN_RANGE) {
             return MoveCreep(creep, source);
         };
+        // console.log(`harvest: ${res}`);
         return res;
     }
-    else
-        return ERR_INVALID_ARGS;
 }
 
 /** @param {Creep} creep **/
