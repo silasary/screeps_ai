@@ -25,6 +25,14 @@ var roleBuilder = {
             }
             else
             {
+                for (var room in Game.rooms){
+                    room = Game.rooms[room];
+                    let sites = room.find(FIND_CONSTRUCTION_SITES);
+                    if (sites)
+                    {
+                        return creepHelper.exitRoom(creep, room.name);
+                    } 
+                }
                 // Don't sit around doing nothing
                 var res = buildPlan.roads();
                 buildPlan.extensions();
