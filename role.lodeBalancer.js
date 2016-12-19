@@ -47,10 +47,10 @@ var roleLodeBalancer = {
                                 structure.structureType == STRUCTURE_SPAWN ||
                                 structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity)
                                 || (structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] < structure.storeCapacity))
-                                && structure != creep.memory.source;
+                                && structure.id != creep.memory.source;
                     }
             });
-            if(targets.length > 0) {
+            if (targets.length > 0) {
                 var closest = creep.pos.findClosestByRange(targets);
                 if(creep.transfer(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(closest);

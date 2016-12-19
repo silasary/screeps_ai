@@ -50,12 +50,19 @@ module.exports = {
                         require('spawner').spawnClaimer(creep.room.name);
                 }
                 if (creep.room.memory.hasSource > 0)
+                {
+                    let source = creepHelper.selectSource(creep);
+                    if (source)
                     {
-                        creep.memory.target = creep.room.name;
-                        delete creep.memory.destination;
-                        creep.say("Using this room.");
-                        return;
+                        creep.memory.source = source.id;
                     }
+                    else
+                        return;
+                    creep.memory.target = creep.room.name;
+                    delete creep.memory.destination;
+                    creep.say("Using this room.");
+                    return;
+                }
                 else
                     return;
             }

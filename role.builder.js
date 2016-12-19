@@ -27,7 +27,7 @@ var roleBuilder = {
             {
                 for (var room in Game.rooms){
                     room = Game.rooms[room];
-                    let sites = room.find(FIND_CONSTRUCTION_SITES);
+                    let sites = room.find(FIND_CONSTRUCTION_SITES, {filter: (site) => {site.owner.name == creep.owner.name}});
                     if (sites)
                     {
                         return creepHelper.exitRoom(creep, room.name);
