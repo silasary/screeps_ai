@@ -19,7 +19,7 @@ var spawnCreep = function(spawn, energy, roleName) {
                 }
                 for (let i = 0; i < numberOfParts; i++) {
                     body.push(MOVE);
-                    bode.push(ATTACK);
+                    body.push(ATTACK);
                 }
             }
             else {
