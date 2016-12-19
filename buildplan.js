@@ -54,7 +54,8 @@ var buildPlan =
 
     spawns: function(){
         for (var room in Game.rooms){
-            build(Game.rooms[room].controller, STRUCTURE_SPAWN);
+            if (Game.rooms[room].controller)
+                build(Game.rooms[room].controller, STRUCTURE_SPAWN);
         }
     }
 }
