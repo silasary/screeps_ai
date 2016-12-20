@@ -25,21 +25,22 @@ var roleBuilder = {
             }
             else
             {
-                for (var room in Game.rooms){
-                    room = Game.rooms[room];
-                    let sites = room.find(FIND_MY_CONSTRUCTION_SITES);
-                    if (sites)
-                    {
-                        return creepHelper.exitRoom(creep, room.name);
-                    } 
-                }
                 // Don't sit around doing nothing
                 var res = buildPlan.roads();
                 buildPlan.extensions();
                 buildPlan.spawns();
-                if (!res){
-                    roleHarvester.run(creep);
+                for (var room in Game.rooms){
+                    room = Game.rooms[room];
+                    let sites = room.find(FIND_MY_CONSTRUCTION_SITES);
+                    if (sites.length > 0)
+                    {
+                        let res = creepHelper.exitRoom(creep, room.name);
+                        if (res == OK){
+                            return;
+                        }
+                    } 
                 }
+                roleHarvester.run(creep);
             }
         }
         else {
