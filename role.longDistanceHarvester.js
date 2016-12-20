@@ -1,4 +1,5 @@
 var roleScout = require('role.scout');
+var roleUpgrader = require('role.upgrader');
 var creepHelper = require('creep.helpers');
 
 module.exports = {
@@ -28,11 +29,13 @@ module.exports = {
                         creep.moveTo(structure);
                     }
                 }
+
+                if (structure == undefined){
+                    roleUpgrader.run(creep);
+                }
             }
             else {
                 creepHelper.exitRoom(creep, creep.memory.home);
-                // var exit = creep.room.findExitTo(creep.memory.home);
-                // creep.moveTo(creep.pos.findClosestByRange(exit));
             }
         }
         // if creep is supposed to harvest energy from source
@@ -65,6 +68,13 @@ module.exports = {
                 }
                 else
                     return;
+            }
+            if (creep.memory.source)
+            {
+                let ret = creepHelper.harvestSource(creep, creep.memory.source);
+                if (ret == OK)
+                    return ret;
+                console.log(ret);
             }
             if (creep.room.name == creep.memory.target) {
                 creepHelper.moveToSource(creep);

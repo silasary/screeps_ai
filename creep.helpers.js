@@ -37,6 +37,10 @@ var selectSource = function(creep){
 var harvestSource = function(creep, source){
     if (!source)
         return ERR_INVALID_ARGS;
+    if (typeof(source) == 'string')
+        source = Game.getObjectById(source);
+    if (!source)
+        return ERR_INVALID_ARGS;
     if (source.structureType)
     {
         let res = creep.withdraw(source, RESOURCE_ENERGY);

@@ -17,7 +17,7 @@ var roleBuilder = {
         }
 
         if(creep.memory.working) {
-            var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+            var target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
             if(target) {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     creepHelper.moveCreep(creep, target);
@@ -27,7 +27,7 @@ var roleBuilder = {
             {
                 for (var room in Game.rooms){
                     room = Game.rooms[room];
-                    let sites = room.find(FIND_CONSTRUCTION_SITES, {filter: (site) => {site.owner.name == creep.owner.name}});
+                    let sites = room.find(FIND_MY_CONSTRUCTION_SITES);
                     if (sites)
                     {
                         return creepHelper.exitRoom(creep, room.name);
