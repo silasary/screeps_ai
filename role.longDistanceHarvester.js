@@ -74,7 +74,14 @@ module.exports = {
                 let ret = creepHelper.harvestSource(creep, creep.memory.source);
                 if (ret == OK)
                     return ret;
-                console.log(ret);
+                if (ret == ERR_INVALID_ARGS)
+                {
+                    // Not in the right room.
+                }
+                else 
+                {
+                    console.log(`${creep.name} failed to go to ${creep.memory.source}: ${ret}`);
+                }
             }
             if (creep.room.name == creep.memory.target) {
                 creepHelper.moveToSource(creep);

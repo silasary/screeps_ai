@@ -19,7 +19,7 @@ var roleLodeBalancer = {
             if (!creep.memory.source){
                 let containers = creep.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
-                            return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > structure.storeCapacity;
+                            return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > (structure.storeCapacity / 2);
                             }
                     }
                 );
